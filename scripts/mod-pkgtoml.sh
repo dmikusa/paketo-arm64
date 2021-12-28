@@ -19,5 +19,5 @@ if ! [ -f "$PKGTOML" ]; then
 	exit 254
 fi
 
-NEW=$(yj -t < buildpacks-tmp/paketo-buildpacks/java/package.toml | jq -r '.dependencies[].uri |= sub("(?<bp>^.*):(?<ver>.*)$"; .bp + "-arm64:" + .ver)' | yj -jti)
+NEW=$(yj -t < "$PKGTOML" | jq -r '.dependencies[].uri |= sub("(?<bp>^.*):(?<ver>.*)$"; .bp + "-arm64:" + .ver)' | yj -jti)
 echo "$NEW" > "$PKGTOML"

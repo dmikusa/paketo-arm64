@@ -2,7 +2,7 @@
 set -eo pipefail
 
 BPID="$1"
-WORK="./buildpacks-tmp"
+WORK="./buildpacks"
 
 if [ -z "$BPID" ]; then
 	echo ""
@@ -25,9 +25,9 @@ for GROUP in $(yj -t < "$WORK/$BPID/buildpack.toml" | jq -rc '.order[].group[]')
 	BUILDPACK=$(echo "$GROUP" | jq -r ".id")
 	VERSION=$(echo "$GROUP" | jq -r ".version")
 	pushd "$WORK/$BUILDPACK" >/dev/null
-	create-package --destination ./out --version "$VERSION"
-	pushd ./out >/dev/null
-	sudo --preserve-env=PATH pack buildpack package "$BPID-arm64:$VERSION"
-	popd
+		create-package --destination ./out --version "$VERSION"
+		pushd ./out >/dev/null
+			sudo --preserve-env=PATH pack buildpack package "$BUILDPACK-arm64:$VERSION"
+		popd
 	popd
 done

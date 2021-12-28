@@ -1,10 +1,11 @@
 ## For the Base image (both build & run)
 FROM ubuntu:focal as base
+ARG STACK_ID
 
 ENV CNB_USER_ID=1000
 ENV CNB_GROUP_ID=1000
-ENV CNB_STACK_ID="com.mikusa.stacks.focal"
-LABEL io.buildpacks.stack.id="com.mikusa.stacks.focal"
+ENV CNB_STACK_ID=${STACK_ID}
+LABEL io.buildpacks.stack.id=${STACK_ID}
 
 RUN groupadd cnb --gid ${CNB_GROUP_ID} && \
   useradd --uid ${CNB_USER_ID} --gid ${CNB_GROUP_ID} -m -s /bin/bash cnb

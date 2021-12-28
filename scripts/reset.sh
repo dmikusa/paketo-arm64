@@ -3,7 +3,7 @@ set -eo pipefail
 
 BPID="$1"
 BPVER="$2"
-WORK="./buildpacks-tmp"
+WORK="./buildpacks"
 
 if [ -z "$BPID" ] || [ -z "$BPVER" ]; then
 	echo ""
@@ -24,10 +24,10 @@ if [ -z "$WORK" ] && ! [ -d "$WORK" ]; then
 fi
 
 pushd "$WORK/$BPID" >/dev/null
-git reset --hard HEAD
-git checkout main
-git pull
-git -c "advice.detachedHead=false" checkout "v$BPVER"
+	git reset --hard HEAD
+	git checkout main
+	git pull
+	git -c "advice.detachedHead=false" checkout "v$BPVER"
 popd
 
 for GROUP in $(yj -t < "$WORK/$BPID/buildpack.toml" | jq -rc '.order[].group[]'); do
@@ -35,9 +35,9 @@ for GROUP in $(yj -t < "$WORK/$BPID/buildpack.toml" | jq -rc '.order[].group[]')
 	VERSION=$(echo "$GROUP" | jq -r ".version")
 	pushd "$WORK/$BUILDPACK" >/dev/null
         git reset --hard HEAD
-	git checkout main
-	git pull
-	git -c "advice.detachedHead=false" checkout "v$VERSION"
+		git checkout main
+		git pull
+		git -c "advice.detachedHead=false" checkout "v$VERSION"
 	popd
 done
 

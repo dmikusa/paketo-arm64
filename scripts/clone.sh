@@ -3,7 +3,7 @@ set -eo pipefail
 
 BPID="$1"
 BPVER="$2"
-WORK="./buildpacks-tmp"
+WORK="./buildpacks"
 
 if [ -z "$BPID" ] || [ -z "$BPVER" ]; then
 	echo ""
@@ -22,7 +22,7 @@ if [ -z "$WORK" ]; then
 fi
 
 mkdir -p "$WORK"
-rm -rf "$WORK/"*
+rm -rf "${WORK:?}/"*
 
 git clone "https://github.com/$BPID" "$WORK/$BPID"
 pushd "$WORK/$BPID" >/dev/null

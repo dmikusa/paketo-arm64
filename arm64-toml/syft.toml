@@ -1,0 +1,55 @@
+# Copyright 2018-2020 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+api = "0.7"
+
+[buildpack]
+  description = "A Cloud Native Buildpack that contributes the Syft CLI which can be used to generate SBoM information"
+  homepage = "https://github.com/paketo-buildpacks/syft"
+  id = "paketo-buildpacks/syft-arm64"
+  keywords = ["bom", "sbom", "bill of materials", "syft"]
+  name = "Paketo Syft Buildpack"
+  sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
+  version = "{{.version}}"
+
+  [[buildpack.licenses]]
+    type = "Apache-2.0"
+    uri = "https://github.com/paketo-buildpacks/syft/blob/main/LICENSE"
+
+[metadata]
+  include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/main", "buildpack.toml"]
+  pre-package = "scripts/build.sh"
+
+  [[metadata.dependencies]]
+    cpes = ["cpe:2.3:a:anchore:syft:0.34.0:*:*:*:*:*:*:*"]
+    id = "syft"
+    name = "Syft"
+    purl = "pkg:generic/anchore-syft@0.34.0"
+    sha256 = "fc8e2cee22cc82a69a1919fa0b559f750fa7fca44bc8b576709bc5f2bcab481c"
+    stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
+    uri = "https://github.com/anchore/syft/releases/download/v0.34.0/syft_0.34.0_linux_arm64.tar.gz"
+    version = "0.34.0"
+
+    [[metadata.dependencies.licenses]]
+      type = "Apache-2.0"
+      uri = "https://github.com/anchore/syft/blob/main/LICENSE"
+
+[[stacks]]
+  id = "io.buildpacks.stacks.bionic"
+
+[[stacks]]
+  id = "io.paketo.stacks.tiny"
+
+[[stacks]]
+  id = "*"
