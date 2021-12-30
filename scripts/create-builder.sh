@@ -87,4 +87,6 @@ EOF
 
 { desc; buildpacks; lifecycle; order; stack; } > "$BLDRTOML"
 
-sudo pack builder create "$BLDRIMG" -c "$BLDRTOML"
+# use pull-policy never so that we alway use the local docker image that we just built
+# without this, it may pull down different docker images and use them instead
+sudo pack builder create "$BLDRIMG" -c "$BLDRTOML" --pull-policy never
