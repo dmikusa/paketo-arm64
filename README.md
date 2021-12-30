@@ -73,8 +73,10 @@ The means the steps to execute are as follows:
 1. `./scripts/clone.sh <buildpack-id> <buildpack-version>`
 2. `find ./buildpacks  -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh`
 3. `find ./buildpacks  -name "package.toml" | xargs -n 1 ./scripts/mod-bptoml.sh`
-4. Copy the `buildpack.toml` files for the three buildpacks referenced above from `paketo-arm64/arm64-toml`. Overwrite the `buildpack.toml` file in the project folder under the working directory with each.
+4. Copy the `buildpack.toml` files for the three buildpacks referenced above from `paketo-arm64/arm64-toml`. Overwrite the `buildpack.toml` file in the project folder under the working directory with each. [1]
 5. `./scripts/build.sh <buildpack-id>`
+
+[1] This example works for `paketo-buildpacks/java` and will require three modified `buildpack.toml` files. You may not need all three if you use a different composite buildpack, like `paketo-buildpacks/java-native-image` which only requires bellsoft and syft. Other composite buildpacks may require more modifications, it depends native code gets installed by that suite of buildpacks.
 
 At this point, you should have images. Run `docker images` to see what's there.
 
@@ -95,6 +97,11 @@ The required information is as follows:
 - Your custom build build image from above
 - The stack id you used when creating the stack above
 - The name of your builder image
+
+Here are a couple of examples:
+
+- For `paketo-buildpacks/java` -> `./scripts/create-builder.sh paketo-buildpacks/java 6.4.0 0.13.2 docker.io/dmikusa2pivotal/stack-run:focal docker.io/dmikusa2pivotal/stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/builder:focal`
+- For `paketo-buildpacks/java-native-image` -> `./scripts/create-builder.sh paketo-buildpacks/java-native-image 7.4.0 0.13.2 docker.io/dmikusa2pivotal/stack-run:focal docker.io/dmikusa2pivotal/stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/native-builder:focal`
 
 At this point, you should have a builder with all of your buildpacks. Time to build some apps!
 
