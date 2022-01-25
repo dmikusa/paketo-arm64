@@ -4,10 +4,11 @@
 
 1. Get yourself some ARM64 hardware (Mac M1) or a VM (Oracle Cloud has free ARM64 VMs)
 2. Install some basic packages: make, curl, git, jq
-3. Install Go. Follow instructions [here](https://go.dev/doc/install).
-4. This is used later to package buildpacks: `GO111MODULE=on go get -u -ldflags="-s -w" github.com/paketo-buildpacks/libpak/cmd/create-package`
-5. Install `yj` which is used by some of the helper scripts. Get it from [here](https://github.com/sclevine/yj/releases). Copy to `/usr/local/bin/`.
-6. Install Docker.
+3. Install Go version 1.17+. Follow instructions [here](https://go.dev/doc/install).
+   > The version of `golang` included with RaspiOS package manager does not work    
+5. This is used later to package buildpacks: `GO111MODULE=on go get -u -ldflags="-s -w" github.com/paketo-buildpacks/libpak/cmd/create-package`
+6. Install `yj` which is used by some of the helper scripts. Get it from [here](https://github.com/sclevine/yj/releases). Copy to `/usr/local/bin/`.
+7. Install Docker.
 
    - For Mac, you can use Docker Desktop if you meet the criteria of their free-use license restrictions or you pay for a license but you can also use [Colima](https://github.com/abiosoft/colima), [Podman](https://podman.io/getting-started/installation#macos) or Kubernetes installations like Minikube that expose the Docker Daemon directly.
    - For Linux, follow [the instructions here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
