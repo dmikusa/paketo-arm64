@@ -73,7 +73,7 @@ The means the steps to execute are as follows:
 
 1. `./scripts/clone.sh <buildpack-id> <buildpack-version>`
 2. `find ./buildpacks  -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh`
-3. `find ./buildpacks  -name "package.toml" | xargs -n 1 ./scripts/mod-bptoml.sh`
+3. `find ./buildpacks  -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh`
 4. Copy the `buildpack.toml` files for the three buildpacks referenced above from `paketo-arm64/arm64-toml`. Overwrite the `buildpack.toml` file in the project folder under the working directory with each. [1]
 5. `./scripts/build.sh <buildpack-id>`
 
