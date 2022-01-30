@@ -4,7 +4,8 @@
 
 1. Get yourself some ARM64 hardware (Mac M1) or a VM (Oracle Cloud has free ARM64 VMs)
 2. Install some basic packages: make, curl, git, jq
-3. Install Go. Follow instructions here.
+3. Install Go version 1.17+. Follow instructions [here](https://go.dev/doc/install).
+    If building on a Raspberry PI, the version of `golang` included with RaspiOS package manager does not work. 
 4. This is used later to package buildpacks: `GO111MODULE=on go get -u -ldflags="-s -w" github.com/paketo-buildpacks/libpak/cmd/create-package`
 5. Install `yj` which is used by some of the helper scripts. Get it from [here](https://github.com/sclevine/yj/releases). Copy to `/usr/local/bin/`.
 6. Install Docker.
@@ -19,8 +20,8 @@
 
 If you are on Mac M1 hardware, you can download an official build from [the releases page](https://github.com/buildpacks/pack/releases). There are no official builds for ARM64 Linux at the moment, this may change in the future. For ARM64 on Linux, you need to build your own version. Follow these instructions to do that.
 
-1. `git clone https://github.com/buildpacks/pack` && `git checkout v0.23.0` (change to latest release version tag at the time of building)
-2. `cd pack && PACK_VERSION=0.23.0 make build`
+1. `git clone https://github.com/buildpacks/pack` && `cd pack` && `git checkout v0.23.0` (change to latest release version tag at the time of building)
+2. `PACK_VERSION=0.23.0 make build`
 3. `./out/pack version` to confirm the version
 4. (Optional) Copy `./out/pack` to `/usr/local/bin/`
 
@@ -72,7 +73,7 @@ The means the steps to execute are as follows:
 
 1. `./scripts/clone.sh <buildpack-id> <buildpack-version>`
 2. `find ./buildpacks  -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh`
-3. `find ./buildpacks  -name "package.toml" | xargs -n 1 ./scripts/mod-bptoml.sh`
+3. `find ./buildpacks  -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh`
 4. Copy the `buildpack.toml` files for the three buildpacks referenced above from `paketo-arm64/arm64-toml`. Overwrite the `buildpack.toml` file in the project folder under the working directory with each. [1]
 5. `./scripts/build.sh <buildpack-id>`
 
