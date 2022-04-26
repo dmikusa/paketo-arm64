@@ -6,24 +6,16 @@
 2. Install some basic packages: make, curl, git, jq
 3. Install Go version 1.17+. Follow instructions [here](https://go.dev/doc/install).
     If building on a Raspberry PI, the version of `golang` included with RaspiOS package manager does not work. 
-4. This is used later to package buildpacks: `GO111MODULE=on go get -u -ldflags="-s -w" github.com/paketo-buildpacks/libpak/cmd/create-package`
-5. Install `yj` which is used by some of the helper scripts. Get it from [here](https://github.com/sclevine/yj/releases). Copy to `/usr/local/bin/`.
-6. Install Docker.
+4. This is used later to package buildpacks: `go install github.com/paketo-buildpacks/libpak/cmd/create-package@v1.59.0`.
+5. Install `yj` which is used by some of the helper scripts. run `go install github.com/sclevine/yj/v5@v5.1.0`.
+6. Add `~/go/bin` to `$PATH`.  Run `export $PATH=$PATH:$HOME/go/bin`.
+7. Install Docker.
 
    - For Mac, you can use Docker Desktop if you meet the criteria of their free-use license restrictions or you pay for a license but you can also use [Colima](https://github.com/abiosoft/colima), [Podman](https://podman.io/getting-started/installation#macos) or Kubernetes installations like Minikube that expose the Docker Daemon directly.
    - For Linux, follow [the instructions here](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
    - When done, run `docker pull ubuntu:latest` (or some other image) just to confirm Docker is working.
-
-7. Grab the scripts used in this article. `git clone https://github.com/dmikusa-pivotal/paketo-arm64`.
-
-## Build `pack` CLI
-
-If you are on Mac M1 hardware, you can download an official build from [the releases page](https://github.com/buildpacks/pack/releases). There are no official builds for ARM64 Linux at the moment, this may change in the future. For ARM64 on Linux, you need to build your own version. Follow these instructions to do that.
-
-1. `git clone https://github.com/buildpacks/pack` && `cd pack` && `git checkout v0.23.0` (change to latest release version tag at the time of building)
-2. `PACK_VERSION=0.23.0 make build`
-3. `./out/pack version` to confirm the version
-4. (Optional) Copy `./out/pack` to `/usr/local/bin/`
+8. Install the `pack` CLI. There are MacOS & Linux arm64 builds on the project's [Github releases](https://github.com/buildpacks/pack/releases). Download and copy to `/usr/local/bin`.
+9. Grab the scripts used in this article. `git clone https://github.com/dmikusa-pivotal/paketo-arm64`.
 
 ## Create a Stack
 
@@ -101,8 +93,9 @@ The required information is as follows:
 
 Here are a couple of examples:
 
-- For `paketo-buildpacks/java` -> `./scripts/create-builder.sh paketo-buildpacks/java 6.4.0 0.13.2 docker.io/dmikusa2pivotal/stack-run:focal docker.io/dmikusa2pivotal/stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/builder:focal`
-- For `paketo-buildpacks/java-native-image` -> `./scripts/create-builder.sh paketo-buildpacks/java-native-image 7.4.0 0.13.2 docker.io/dmikusa2pivotal/stack-run:focal docker.io/dmikusa2pivotal/stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/native-builder:focal`
+- For `paketo-buildpacks/java` -> `./scripts/create-builder.sh paketo-buildpacks/java 6.4.0 0.14.0 docker.io/dmikusa2pivotal/stack-run:focal docker.io/dmikusa2pivotal/stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/builder:focal`
+- For `paketo-buildpacks/java-native-image` -> `./scripts/create-builder.sh paketo-buildpacks/java-native-image 7.4.0 0.14.0 docker.io/dmikusa2pivotal/stack-run:focal docker.io/dmikusa2pivotal/stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/native-builder:focal`
+- For `paketo-community/rust` -> `./scripts/create-builder.sh paketo-community/rust 0.10.0 0.14.0 docker.io/dmikusa2pivotal/rust-stack-run:focal docker.io/dmikusa2pivotal/rust-stack-build:focal com.mikusa.stacks.focal dmikusa2pivotal/rust-builder:focal`
 
 At this point, you should have a builder with all of your buildpacks. Time to build some apps!
 
