@@ -1,0 +1,50 @@
+api = "0.6"
+
+[buildpack]
+  description = "A Cloud Native Buildpack that provides the Rust language build tools."
+  homepage = "https://github.com/paketo-community/rust-dist"
+  id = "paketo-community/rust-dist-arm64"
+  keywords = ["rust", "rustc", "cargo", "tools"]
+  name = "Rust Distribution Buildpack"
+  version = "{{.version}}"
+
+  [[buildpack.licenses]]
+    type = "Apache-2.0"
+    uri = "https://github.com/paketo-community/rust-dist/blob/main/LICENSE"
+
+[metadata]
+  include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/main", "buildpack.toml"]
+  pre-package = "scripts/build.sh"
+
+  [[metadata.configurations]]
+    build = true
+    default = "1.*"
+    description = "the Rust version"
+    name = "BP_RUST_VERSION"
+
+  [[metadata.dependencies]]
+    id = "rust"
+    name = "Rust"
+    sha256 = "99c419c2f35d4324446481c39402c7baecd7a8baed7edca9f8d6bbd33c05550c"
+    source = "https://static.rust-lang.org/dist/rustc-1.55.0-src.tar.gz"
+    source_sha256 = "b2379ac710f5f876ee3c3e03122fe33098d6765d371cac6c31b1b6fc8e43821e"
+    stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
+    uri = "https://static.rust-lang.org/dist/rust-1.60.0-aarch64-unknown-linux-gnu.tar.gz"
+    version = "1.60.0"
+
+    [[metadata.dependencies.licenses]]
+      type = "Apache-2.0"
+      uri = "https://github.com/rust-lang/rust/blob/master/LICENSE-APACHE"
+
+    [[metadata.dependencies.licenses]]
+      type = "MIT"
+      uri = "https://github.com/rust-lang/rust/blob/master/LICENSE-MIT"
+
+[[stacks]]
+  id = "io.buildpacks.stacks.bionic"
+
+[[stacks]]
+  id = "io.paketo.stacks.tiny"
+
+[[stacks]]
+  id = "*"

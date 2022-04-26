@@ -1,0 +1,94 @@
+api = "0.6"
+
+[buildpack]
+  description = "A Cloud Native Buildpack that installs and executes `rustup` to install Rust"
+  homepage = "https://github.com/paketo-community/rustup"
+  id = "paketo-community/rustup-arm64"
+  keywords = ["rust", "rustup"]
+  name = "Paketo Rustup Buildpack"
+  version = "{{.version}}"
+
+  [[buildpack.licenses]]
+    type = "Apache-2.0"
+    uri = "https://github.com/paketo-community/rustup/blob/main/LICENSE"
+
+[metadata]
+  include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/main", "buildpack.toml"]
+  pre-package = "scripts/build.sh"
+
+  [[metadata.configurations]]
+    build = true
+    default = "stable"
+    description = "the Rust toolchain or version number to install"
+    name = "BP_RUST_TOOLCHAIN"
+
+  [[metadata.configurations]]
+    build = true
+    default = "minimal"
+    description = "the Rust profile to install"
+    name = "BP_RUST_PROFILE"
+
+  [[metadata.configurations]]
+    build = true
+    default = ""
+    description = "an additional Rust target to install"
+    name = "BP_RUST_TARGET"
+
+  [[metadata.configurations]]
+    build = true
+    default = "true"
+    description = "use rustup to install Rust"
+    name = "BP_RUSTUP_ENABLED"
+
+  [[metadata.configurations]]
+    build = true
+    default = "1"
+    description = "the rustup version"
+    name = "BP_RUSTUP_INIT_VERSION"
+
+  [[metadata.configurations]]
+    build = true
+    default = "gnu"
+    description = "libc implementation: gnu or musl"
+    name = "BP_RUSTUP_INIT_LIBC"
+
+  [[metadata.dependencies]]
+    id = "rustup-gnu"
+    name = "Rustup (GNU libc)"
+    sha256 = "32a1532f7cef072a667bac53f1a5542c99666c4071af0c9549795bbdb2069ec1"
+    stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
+    uri = "https://static.rust-lang.org/rustup/archive/1.24.3/aarch64-unknown-linux-gnu/rustup-init"
+    version = "1.24.3"
+
+    [[metadata.dependencies.licenses]]
+      type = "Apache-2.0"
+      uri = "https://github.com/rust-lang/rustup/blob/master/LICENSE-APACHE"
+
+    [[metadata.dependencies.licenses]]
+      type = "MIT"
+      uri = "https://github.com/rust-lang/rustup/blob/master/LICENSE-MIT"
+
+  [[metadata.dependencies]]
+    id = "rustup-musl"
+    name = "Rustup (musl libc)"
+    sha256 = "89ce657fe41e83186f5a6cdca4e0fd40edab4fd41b0f9161ac6241d49fbdbbbe"
+    stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
+    uri = "https://static.rust-lang.org/rustup/archive/1.24.3/aarch64-unknown-linux-musl/rustup-init"
+    version = "1.24.3"
+
+    [[metadata.dependencies.licenses]]
+      type = "Apache-2.0"
+      uri = "https://github.com/rust-lang/rustup/blob/master/LICENSE-APACHE"
+
+    [[metadata.dependencies.licenses]]
+      type = "MIT"
+      uri = "https://github.com/rust-lang/rustup/blob/master/LICENSE-MIT"
+
+[[stacks]]
+  id = "io.buildpacks.stacks.bionic"
+
+[[stacks]]
+  id = "io.paketo.stacks.tiny"
+
+[[stacks]]
+  id = "*"
