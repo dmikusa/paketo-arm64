@@ -1,0 +1,64 @@
+api = "0.6"
+
+[buildpack]
+  description = "A Cloud Native Buildpack that builds Cargo-based Rust applications from source"
+  homepage = "https://github.com/paketo-community/cargo"
+  id = "paketo-community/cargo-arm64"
+  keywords = ["cargo", "rust", "build-system"]
+  name = "Rust Cargo Build Pack"
+  version = "{{.version}}"
+
+  [[buildpack.licenses]]
+    type = "Apache-2.0"
+    uri = "https://github.com/paketo-community/cargo/blob/main/LICENSE"
+
+[metadata]
+  include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/main", "buildpack.toml"]
+  pre-package = "scripts/build.sh"
+
+  [[metadata.configurations]]
+    build = true
+    default = ""
+    description = "additional arguments to pass to Cargo install"
+    name = "BP_CARGO_INSTALL_ARGS"
+
+  [[metadata.configurations]]
+    build = true
+    default = ""
+    description = "the subset of workspace members for Cargo to install"
+    name = "BP_CARGO_WORKSPACE_MEMBERS"
+
+  [[metadata.configurations]]
+    build = true
+    default = "static, templates, public, html"
+    description = "folders that should not be deleted and should persist to the generated image"
+    name = "BP_CARGO_EXCLUDE_FOLDERS"
+
+  [[metadata.configurations]]
+    build = true
+    default = "false"
+    description = "Skip installing tini"
+    name = "BP_CARGO_TINI_DISABLED"
+
+  [[metadata.dependencies]]
+    cpes = ["cpe:2.3:a:tini_project:tini:0.19.0:*:*:*:*:*:*:*"]
+    id = "tini"
+    name = "Tini"
+    purl = "pkg:generic/tini@v0.19.0"
+    sha256 = "07952557df20bfd2a95f9bef198b445e006171969499a1d361bd9e6f8e5e0e81"
+    stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
+    uri = "https://github.com/krallin/tini/releases/download/v0.19.0/tini-arm64"
+    version = "0.19.0"
+
+    [[metadata.dependencies.licenses]]
+      type = "MIT"
+      uri = "https://github.com/krallin/tini/blob/master/LICENSE"
+
+[[stacks]]
+  id = "io.buildpacks.stacks.bionic"
+
+[[stacks]]
+  id = "io.paketo.stacks.tiny"
+
+[[stacks]]
+  id = "*"
