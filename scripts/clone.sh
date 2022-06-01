@@ -24,9 +24,7 @@ fi
 mkdir -p "$WORK"
 rm -rf "${WORK:?}/"*
 
-git config --global user.email dashaun@dashaun.com
-
-git clone "git://github.com/$BPID" "$WORK/$BPID"
+git clone "https://dashaun@github.com/$BPID" "$WORK/$BPID"
 pushd "$WORK/$BPID" >/dev/null
 git -c "advice.detachedHead=false" checkout "v$BPVER"
 popd
@@ -34,7 +32,7 @@ popd
 for GROUP in $(yj -t < "$WORK/$BPID/buildpack.toml" | jq -rc '.order[].group[]'); do
 	BUILDPACK=$(echo "$GROUP" | jq -r ".id")
 	VERSION=$(echo "$GROUP" | jq -r ".version")
-	git clone "git://github.com/$BUILDPACK" "$WORK/$BUILDPACK"
+	git clone "https://dashaun@github.com/$BUILDPACK" "$WORK/$BUILDPACK"
 	pushd "$WORK/$BUILDPACK" >/dev/null
 	git -c "advice.detachedHead=false" checkout "v$VERSION"
 	popd
