@@ -1,0 +1,23 @@
+name: arm64-buildpack
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ARM64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install prerequisites
+        run: sudo apt install jq make curl git -y
+
+      #Build Image
+      - name: Build Image
+        run: ./mvnw -Pnative-arm64 spring-boot:build-image -DskipTests
