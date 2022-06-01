@@ -24,6 +24,8 @@ fi
 mkdir -p "$WORK"
 rm -rf "${WORK:?}/"*
 
+git config --global user.email dashaun@dashaun.com
+
 git clone "https://github.com/$BPID" "$WORK/$BPID"
 pushd "$WORK/$BPID" >/dev/null
 git -c "advice.detachedHead=false" checkout "v$BPVER"
