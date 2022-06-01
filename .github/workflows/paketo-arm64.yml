@@ -16,4 +16,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Run Image
-        run: sudo docker build . -t dashaun/stack-run:focal --target run --build-arg STACK_ID="20220531"
+        run: sudo docker build ./stack -t dashaun/stack-run:focal --target run --build-arg STACK_ID="20220531"
