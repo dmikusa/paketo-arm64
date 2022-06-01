@@ -21,11 +21,5 @@ jobs:
       - name: Build Image
         run: sudo docker build ./stack -t dashaun/stack-build:focal --target build --build-arg STACK_ID="20220531"
 
-      - name: git setup
-        uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          global: true
-          name: 'DaShaun'
-          email: 'dashaun@dashaun.com'
-          actor: 'dashaun'
-      - run: ./scripts/clone.sh paketo-buildpacks/bellsoft-liberica-arm64 9.3.5
+      - name: Clone 
+        run: ./scripts/clone.sh paketo-buildpacks/bellsoft-liberica-arm64 9.3.5
