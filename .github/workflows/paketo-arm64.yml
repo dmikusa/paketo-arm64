@@ -1,0 +1,19 @@
+name: arm64-buildpack
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ARM64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Run Image
+        run: sudo docker build . -t dashaun/stack-run:focal --target run --build-arg STACK_ID="20220531"
