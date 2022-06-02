@@ -6,7 +6,7 @@
 2. Install some basic packages: make, curl, git, jq
 3. Install Go version 1.17+. Follow instructions [here](https://go.dev/doc/install).
     If building on a Raspberry PI, the version of `golang` included with RaspiOS package manager does not work. 
-4. This is used later to package buildpacks: `go install github.com/paketo-buildpacks/libpak/cmd/create-package@v1.59.0`.
+4. This is used later to package buildpacks: `go install github.com/paketo-buildpacks/libpak/cmd/create-package@v1.60.1`.
 5. Install `yj` which is used by some of the helper scripts. run `go install github.com/sclevine/yj/v5@v5.1.0`.
 6. Add `~/go/bin` to `$PATH`.  Run `export $PATH=$PATH:$HOME/go/bin`.
 7. Install Docker.
