@@ -36,9 +36,10 @@ jobs:
           docker build ./stack -t dashaun/stack-build:focal --target build --build-arg STACK_ID="io.dashaun.stack.focal.arm64"
           docker push dashaun/stack-build:focal
 
-      - name: install yq
+      - name: install deps
         run: |
           go install github.com/sclevine/yj/v5@v5.1.0
+          go install github.com/paketo-buildpacks/libpak/cmd/create-package@v1.60.1
           
       - name: java-buildpack
         run: |
