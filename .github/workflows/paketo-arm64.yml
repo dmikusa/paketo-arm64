@@ -17,27 +17,27 @@ jobs:
 
       - name: Run Image
         run: |
-        docker build ./stack -t dashaun/stack-run:focal --target run --build-arg STACK_ID="io.dashaun.stack.focal.arm64"
-        docker push dashaun/stack-run:focal
+          docker build ./stack -t dashaun/stack-run:focal --target run --build-arg STACK_ID="io.dashaun.stack.focal.arm64"
+          docker push dashaun/stack-run:focal
 
       - name: Build Image
         run: |
-        docker build ./stack -t dashaun/stack-build:focal --target build --build-arg STACK_ID="io.dashaun.stack.focal.arm64"
-        docker push dashaun/stack-build:focal
+          docker build ./stack -t dashaun/stack-build:focal --target build --build-arg STACK_ID="io.dashaun.stack.focal.arm64"
+          docker push dashaun/stack-build:focal
 
       - name: java-buildpack
         run: |
-        ./scripts/clone.sh paketo-buildpacks/java 6.24.0
-        find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
-        find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
-        cp ./arm64-toml/bellsoft.toml buildpacks/paketo-buildpacks/bellsoft-liberica/buildpack.toml
-        cp ./arm64-toml/syft.toml buildpacks/paketo-buildpacks/syft/buildpack.toml
-        cp ./arm64-toml/watchexec.toml buildpacks/paketo-buildpacks/watchexec/buildpack.toml
-        ./scripts/build.sh paketo-buildpacks/java
-        ./scripts/create-builder.sh paketo-buildpacks/java 6.24.0 0.14.0 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/builder:focal
+          ./scripts/clone.sh paketo-buildpacks/java 6.24.0
+          find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
+          find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
+          cp ./arm64-toml/bellsoft.toml buildpacks/paketo-buildpacks/bellsoft-liberica/buildpack.toml
+          cp ./arm64-toml/syft.toml buildpacks/paketo-buildpacks/syft/buildpack.toml
+          cp ./arm64-toml/watchexec.toml buildpacks/paketo-buildpacks/watchexec/buildpack.toml
+          ./scripts/build.sh paketo-buildpacks/java
+          ./scripts/create-builder.sh paketo-buildpacks/java 6.24.0 0.14.0 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/builder:focal
 
       - name: java-native-image-buildpack
-          run: |
+        run: |
           ./scripts/clone.sh paketo-buildpacks/java-native-image 7.19.0
           find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
           find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
