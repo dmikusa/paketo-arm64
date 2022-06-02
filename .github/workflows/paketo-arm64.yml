@@ -12,6 +12,11 @@ jobs:
     runs-on: ARM64
 
     steps:
+      - name: setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.17.0'
+          
       - name: Checkout
         uses: actions/checkout@v2
         
@@ -31,6 +36,10 @@ jobs:
           docker build ./stack -t dashaun/stack-build:focal --target build --build-arg STACK_ID="io.dashaun.stack.focal.arm64"
           docker push dashaun/stack-build:focal
 
+      - name: install yq
+        run: |
+          go install github.com/sclevine/yj/v5@v5.1.0
+          
       - name: java-buildpack
         run: |
           ./scripts/clone.sh paketo-buildpacks/java 6.24.0
