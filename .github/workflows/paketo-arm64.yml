@@ -41,6 +41,8 @@ jobs:
           cp ./arm64-toml/watchexec.toml buildpacks/paketo-buildpacks/watchexec/buildpack.toml
           ./scripts/build.sh paketo-buildpacks/java
           ./scripts/create-builder.sh paketo-buildpacks/java 6.24.0 0.14.0 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/builder:focal
+          docker tag dashaun/builder:focal docker.io/dashaun/java-builder-arm64:6.24.0
+          docker push docker.io/dashaun/java-builder-arm64:6.24.0
 
       - name: java-native-image-buildpack
         run: |
