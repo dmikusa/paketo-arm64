@@ -64,7 +64,9 @@ jobs:
           ./scripts/build.sh paketo-buildpacks/java
           ./scripts/create-builder.sh paketo-buildpacks/java 6.24.0 0.14.0 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/builder:focal
           docker tag dashaun/builder:focal docker.io/dashaun/java-builder-arm64:6.24.0
+          docker tag dashaun/builder:focal docker.io/dashaun/java-builder-arm64:latest
           docker push docker.io/dashaun/java-builder-arm64:6.24.0
+          docker push docker.io/dashaun/java-builder-arm64:latest
 
       - name: java-native-image-buildpack
         run: |
@@ -77,5 +79,9 @@ jobs:
           ./scripts/create-builder.sh paketo-buildpacks/java-native-image 7.19.0 0.14.0 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/native-builder:focal
           docker tag dashaun/native-builder:focal docker.io/dashaun/java-native-builder-arm64:7.19.0
           docker tag dashaun/native-builder:focal docker.io/dashaun/native-builder:focal-arm64
+          docker tag dashaun/native-builder:focal docker.io/dashaun/native-builder:latest
+          docker tag dashaun/native-builder:focal docker.io/dashaun/java-native-builder-arm64:latest
           docker push docker.io/dashaun/java-native-builder-arm64:7.19.0
+          docker push docker.io/dashaun/java-native-builder-arm64:latest
           docker push docker.io/dashaun/native-builder:focal-arm64
+          docker push docker.io/dashaun/native-builder:latest
