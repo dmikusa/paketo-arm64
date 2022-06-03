@@ -56,6 +56,7 @@ jobs:
       - name: java-buildpack
         run: |
           ./scripts/clone.sh paketo-buildpacks/java 6.24.0
+          sed -i "s/paketo-buildpacks\/java\"/dashaun\/java-builder\"/g" ./buildpacks/paketo-buildpacks/java/buildpack.toml
           find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
           find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
           cp ./arm64-toml/bellsoft.toml buildpacks/paketo-buildpacks/bellsoft-liberica/buildpack.toml
@@ -71,6 +72,7 @@ jobs:
       - name: java-native-image-buildpack
         run: |
           ./scripts/clone.sh paketo-buildpacks/java-native-image 7.19.0
+          sed -i "s/paketo-buildpacks\/java-native-image/dashaun\/java-native-image/g" ./buildpacks/paketo-buildpacks/java-native-image/buildpack.toml
           find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
           find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
           cp ./arm64-toml/bellsoft.toml buildpacks/paketo-buildpacks/bellsoft-liberica/buildpack.toml
