@@ -20,7 +20,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.2
         with:
-          cli_config_credentials_token: ${{ secrets.TFE_TOKEN }}
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: terraform init
         run: terraform init -upgrade
