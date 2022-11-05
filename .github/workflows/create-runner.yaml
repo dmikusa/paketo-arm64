@@ -7,7 +7,7 @@ jobs:
   create-oci-arm64-runner:
     runs-on: ubuntu-latest
     env:
-      TF_WORKSPACE: io-dashaun-function-azure-webhook-listener
+      TF_WORKSPACE: paketo-arm64
       TF_CLOUD_ORGANIZATION: dashaun
     steps:
 #      - name: Terraform Cloud Workspace Init
