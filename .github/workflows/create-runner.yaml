@@ -10,24 +10,6 @@ jobs:
       TF_WORKSPACE: paketo-arm64
       TF_CLOUD_ORGANIZATION: dashaun
     steps:
-#      - name: Terraform Cloud Workspace Init
-#        run: |
-#          curl -X POST https://api.github.com/repos/dashaun/terraform-cloud/dispatches \
-#          -H 'Accept: application/vnd.github.everest-preview+json' \
-#          -u ${{ secrets.ACCESS_TOKEN }} \
-#          --data '{"event_type": "init '"$GITHUB_REPOSITORY"'", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
-#          export TF_WORKSPACE=dynamic-tf-oci-arm64-runner
-#          export TF_CLOUD_ORGANIZATION=dashaun
-#          export TF_VAR_github_user=dashaun
-#          export TF_VAR_github_org=dashaun
-#          export TF_VAR_oci_compartment_id=${{ secrets.OCI_COMPARTMENT_ID }}
-#          export TF_VAR_tailscale_auth_key=${{ secrets.TAILSCALE_AUTH_TOKEN }}
-#          export TF_VAR_tenancy_ocid=${{ secrets.OCI_TENANCY_ID }}
-#          export TF_VAR_compartment_ocid=${{ secrets.OCI_COMPARTMENT_ID }}
-#          export TF_VAR_user_ocid=${{ secrets.OCI_USER_OCID }}
-#          export TF_VAR_fingerprint=${{ secrets.OCI_FINGERPRINT }}
-#          export TF_VAR_private_key=${{ secrets.OCI_PRIVATE_KEY }}
-#          export TF_VAR_github_api_token=${{ secrets.ACCESS_TOKEN }}
 
       - name: Checkout dynamic-tf-oci-arm64
         uses: actions/checkout@v2
