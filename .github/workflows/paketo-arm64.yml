@@ -55,7 +55,7 @@ jobs:
 
       - name: java-buildpack
         run: |
-          ./scripts/clone.sh paketo-buildpacks/java 7.5.0
+          ./scripts/clone.sh paketo-buildpacks/java 7.10.0
           sed -i "s/paketo-buildpacks\/java\"/dashaun\/java-builder\"/g" ./buildpacks/paketo-buildpacks/java/buildpack.toml
           find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
           find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
@@ -63,27 +63,27 @@ jobs:
           cp ./arm64-toml/syft.toml buildpacks/paketo-buildpacks/syft/buildpack.toml
           cp ./arm64-toml/watchexec.toml buildpacks/paketo-buildpacks/watchexec/buildpack.toml
           ./scripts/build.sh paketo-buildpacks/java
-          ./scripts/create-builder.sh paketo-buildpacks/java 7.5.0 0.14.2 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/builder:focal
-          docker tag dashaun/builder:focal docker.io/dashaun/java-builder-arm64:7.5.0
+          ./scripts/create-builder.sh paketo-buildpacks/java 7.10.0 0.14.2 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/builder:focal
+          docker tag dashaun/builder:focal docker.io/dashaun/java-builder-arm64:7.10.0
           docker tag dashaun/builder:focal docker.io/dashaun/java-builder-arm64:latest
-          docker push docker.io/dashaun/java-builder-arm64:7.5.0
+          docker push docker.io/dashaun/java-builder-arm64:7.10.0
           docker push docker.io/dashaun/java-builder-arm64:latest
 
       - name: java-native-image-buildpack
         run: |
-          ./scripts/clone.sh paketo-buildpacks/java-native-image 7.33.0
+          ./scripts/clone.sh paketo-buildpacks/java-native-image 7.37.0
           sed -i "s/paketo-buildpacks\/java-native-image/dashaun\/java-native-image/g" ./buildpacks/paketo-buildpacks/java-native-image/buildpack.toml
           find ./buildpacks -name "buildpack.toml" | xargs -n 1 ./scripts/mod-bptoml.sh
           find ./buildpacks -name "package.toml" | xargs -n 1 ./scripts/mod-pkgtoml.sh
           cp ./arm64-toml/bellsoft.toml buildpacks/paketo-buildpacks/bellsoft-liberica/buildpack.toml
           cp ./arm64-toml/syft.toml buildpacks/paketo-buildpacks/syft/buildpack.toml
           ./scripts/build.sh paketo-buildpacks/java-native-image
-          ./scripts/create-builder.sh paketo-buildpacks/java-native-image 7.33.0 0.14.2 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/native-builder:focal
-          docker tag dashaun/native-builder:focal docker.io/dashaun/java-native-builder-arm64:7.33.0
+          ./scripts/create-builder.sh paketo-buildpacks/java-native-image 7.37.0 0.14.2 dashaun/stack-run:focal dashaun/stack-build:focal io.dashaun.stack.focal.arm64 dashaun/native-builder:focal
+          docker tag dashaun/native-builder:focal docker.io/dashaun/java-native-builder-arm64:7.37.0
           docker tag dashaun/native-builder:focal docker.io/dashaun/native-builder:focal-arm64
           docker tag dashaun/native-builder:focal docker.io/dashaun/native-builder:latest
           docker tag dashaun/native-builder:focal docker.io/dashaun/java-native-builder-arm64:latest
-          docker push docker.io/dashaun/java-native-builder-arm64:7.33.0
+          docker push docker.io/dashaun/java-native-builder-arm64:7.37.0
           docker push docker.io/dashaun/java-native-builder-arm64:latest
           docker push docker.io/dashaun/native-builder:focal-arm64
           docker push docker.io/dashaun/native-builder:latest
