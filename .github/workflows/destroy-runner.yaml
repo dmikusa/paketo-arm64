@@ -1,0 +1,4 @@
+name: destroy-oci-arm64-runner
+
+on:
+  workflow_dispatch:

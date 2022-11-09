@@ -41,16 +41,16 @@ jobs:
           go install github.com/sclevine/yj/v5@v5.1.0
           go install github.com/paketo-buildpacks/libpak/cmd/create-package@v1.60.1
           
-      - name: install pack-arm64
+      - name: Downlad pack-arm64
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: 'buildpacks/pack'
-          version: 'tags/v0.26.0'
-          file: 'pack-v0.26.0-linux-arm64.tgz'
+          version: 'tags/v0.27.0'
+          file: 'pack-v0.27.0-linux-arm64.tgz'
     
       - name: Install pack
         run: |
-          tar -xvzf pack-v0.26.0-linux-arm64.tgz
+          tar -xvzf pack-v0.27.0-linux-arm64.tgz
           sudo install pack /usr/local/bin
 
       - name: java-buildpack
