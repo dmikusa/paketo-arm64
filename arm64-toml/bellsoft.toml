@@ -17,7 +17,7 @@ api = "0.7"
 [buildpack]
   description = "A Cloud Native Buildpack that provides the Bellsoft Liberica implementations of JREs and JDKs"
   homepage = "https://github.com/paketo-buildpacks/bellsoft-liberica"
-  id = "paketo-buildpacks/bellsoft-liberica"
+  id = "paketo-buildpacks/bellsoft-liberica-arm64"
   keywords = ["java", "jvm", "jre", "jdk"]
   name = "Paketo Buildpack for BellSoft Liberica"
   sbom-formats = ["application/vnd.syft+json", "application/vnd.cyclonedx+json"]

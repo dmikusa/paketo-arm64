@@ -142,3 +142,13 @@ Here is a breakdown of the scripts that you can use to mostly automate this proc
     For example: `./reset.sh paketo-buildpacks/java 6.4.0`. This will reset the working directory to the 6.4.0 version. If this fails, like if new buildpacks have been introduced, then you should run `clone.sh` instead. Running `clone.sh` is similar but wipes and results in a fresh working directory.
 
 6. [create-builder.sh](https://github.com/dmikusa-pivotal/paketo-arm64/blob/main/create-builder.sh) can be used to generate a `builder.toml` and create a builder image. This works by generating a builder.toml based on the information passed into it and what's in the referenced composite buildpack's `buildpack.toml` file. This requires a lot of input so see [this section](#create-a-builder) for details on running it.
+
+## Updating to new versions - manual process
+
+
+
+1. For each file in `arm64-toml`
+   1. Pull the latest version of the buildpack.toml
+   2. Do a diff and update the dependencies and the SHA values for ARM64/aarch64 versions
+
+2. Update `.github/workflows/paketo-arm64` versions for builder and lifecycle
