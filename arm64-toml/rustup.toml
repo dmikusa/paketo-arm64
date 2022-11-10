@@ -1,4 +1,18 @@
-api = "0.6"
+# Copyright 2018-2021 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+api = "0.7"
 
 [buildpack]
   description = "A Cloud Native Buildpack that installs and executes `rustup` to install Rust"
@@ -6,6 +20,7 @@ api = "0.6"
   id = "paketo-community/rustup-arm64"
   keywords = ["rust", "rustup"]
   name = "Paketo Rustup Buildpack"
+  sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
   version = "{{.version}}"
 
   [[buildpack.licenses]]
@@ -53,12 +68,14 @@ api = "0.6"
     name = "BP_RUSTUP_INIT_LIBC"
 
   [[metadata.dependencies]]
-    id = "rustup-gnu"
+    cpes = ["cpe:2.3:a:rust:rustup:1.25.1:*:*:*:*:*:*:*"]
+    id = "rustup-init-gnu"
     name = "Rustup (GNU libc)"
-    sha256 = "32a1532f7cef072a667bac53f1a5542c99666c4071af0c9549795bbdb2069ec1"
+    purl = "pkg:generic/rustup@1.25.1"
+    sha256 = ""
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://static.rust-lang.org/rustup/archive/1.24.3/aarch64-unknown-linux-gnu/rustup-init"
-    version = "1.24.3"
+    uri = "https://static.rust-lang.org/rustup/archive/1.25.1/aarch64-unknown-linux-gnu/rustup-init"
+    version = "1.25.1"
 
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"
@@ -69,12 +86,14 @@ api = "0.6"
       uri = "https://github.com/rust-lang/rustup/blob/master/LICENSE-MIT"
 
   [[metadata.dependencies]]
-    id = "rustup-musl"
+    cpes = ["cpe:2.3:a:rust:rustup:1.25.1:*:*:*:*:*:*:*"]
+    id = "rustup-init-musl"
     name = "Rustup (musl libc)"
-    sha256 = "89ce657fe41e83186f5a6cdca4e0fd40edab4fd41b0f9161ac6241d49fbdbbbe"
+    purl = "pkg:generic/rustup@1.25.1"
+    sha256 = ""
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://static.rust-lang.org/rustup/archive/1.24.3/aarch64-unknown-linux-musl/rustup-init"
-    version = "1.24.3"
+    uri = "https://static.rust-lang.org/rustup/archive/1.25.1/aarch64-unknown-linux-musl/rustup-init"
+    version = "1.25.1"
 
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"

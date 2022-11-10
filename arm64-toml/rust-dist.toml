@@ -1,4 +1,18 @@
-api = "0.6"
+# Copyright 2018-2022 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+api = "0.7"
 
 [buildpack]
   description = "A Cloud Native Buildpack that provides the Rust language build tools."
@@ -6,6 +20,7 @@ api = "0.6"
   id = "paketo-community/rust-dist-arm64"
   keywords = ["rust", "rustc", "cargo", "tools"]
   name = "Rust Distribution Buildpack"
+  sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
   version = "{{.version}}"
 
   [[buildpack.licenses]]
@@ -23,14 +38,16 @@ api = "0.6"
     name = "BP_RUST_VERSION"
 
   [[metadata.dependencies]]
+    cpes = ["cpe:2.3:a:rust:rust:1.65.0:*:*:*:*:*:*:*"]
     id = "rust"
     name = "Rust"
-    sha256 = "99c419c2f35d4324446481c39402c7baecd7a8baed7edca9f8d6bbd33c05550c"
-    source = "https://static.rust-lang.org/dist/rustc-1.55.0-src.tar.gz"
-    source_sha256 = "b2379ac710f5f876ee3c3e03122fe33098d6765d371cac6c31b1b6fc8e43821e"
+    purl = "pkg:generic/rust@1.65.0"
+    sha256 = "ab25be4d2c3ad580dea968fba84f190b773adc993380cb65dd2a5d64d22614ea"
+    source = "https://static.rust-lang.org/dist/rustc-1.64.0-src.tar.gz"
+    source_sha256 = "b3cd9f481e1a2901bf6f3808d30c69cc4ea80d93c4cc4e2ed52258b180381205"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://static.rust-lang.org/dist/rust-1.60.0-aarch64-unknown-linux-gnu.tar.gz"
-    version = "1.60.0"
+    uri = "https://deps.paketo.io/rust/rust_1.65.0_linux_noarch_bionic_ab25be4d.tgz"
+    version = "1.65.0"
 
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"

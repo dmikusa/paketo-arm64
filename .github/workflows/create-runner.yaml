@@ -1,0 +1,38 @@
+name: create-oci-arm64-runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-oci-arm64-runner:
+    runs-on: ubuntu-latest
+    env:
+      TF_WORKSPACE: paketo-arm64
+      TF_CLOUD_ORGANIZATION: dashaun
+    steps:
+
+      - name: Checkout dynamic-tf-oci-arm64
+        uses: actions/checkout@v2
+        with:
+          repository: dashaun/dynamic-tf-oci-arm64-runner
+          ref: main
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: terraform init
+        run: terraform init -upgrade
+
+      - name: terraform validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: terraform plan
+        id: plan
+        run: terraform plan -no-color
+
+      - name: terraform apply
+        id: apply
+        run: terraform apply -auto-approve

@@ -1,4 +1,4 @@
-# Copyright 2018-2020 the original author or authors.
+# Copyright 2018-2021 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ api = "0.7"
   homepage = "https://github.com/paketo-buildpacks/watchexec"
   id = "paketo-buildpacks/watchexec-arm64"
   keywords = ["watchexec", "reloadable", "processes"]
-  name = "Paketo Watchexec Buildpack"
+  name = "Paketo Buildpack for Watchexec"
   sbom-formats = ["application/vnd.syft+json", "application/vnd.cyclonedx+json"]
   version = "{{.version}}"
 
@@ -32,14 +32,14 @@ api = "0.7"
   pre-package = "scripts/build.sh"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:watchexec:watchexec:1.19.0:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:watchexec:watchexec:1.20.5:*:*:*:*:*:*:*"]
     id = "watchexec"
     name = "Watchexec"
-    purl = "pkg:generic/watchexec@1.19.0?arch=arm64"
-    sha256 = "692b9f95ce525068755d97382020d70e83b1486a178c36db3a3e3e04c8273472"
+    purl = "pkg:generic/watchexec@1.20.5?arch=arm64"
+    sha256 = ""
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://github.com/watchexec/watchexec/releases/download/cli-v1.19.0/watchexec-1.19.0-aarch64-unknown-linux-gnu.tar.xz"
-    version = "1.19.0"
+    uri = "https://github.com/watchexec/watchexec/releases/download/cli-v1.20.5/watchexec-1.20.5-aarch64-unknown-linux-gnu.tar.xz"
+    version = "1.20.5"
 
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"
