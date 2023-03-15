@@ -8,7 +8,7 @@
     If building on a Raspberry PI, the version of `golang` included with RaspiOS package manager does not work. 
 4. This is used later to package buildpacks: `go install github.com/paketo-buildpacks/libpak/cmd/create-package@v1.60.1`.
 5. Install `yj` which is used by some of the helper scripts. run `go install github.com/sclevine/yj/v5@v5.1.0`.
-6. Add `~/go/bin` to `$PATH`.  Run `export $PATH=$PATH:$HOME/go/bin`.
+6. Add `~/go/bin` to `$PATH`.  Run `export PATH=$PATH:$HOME/go/bin`.
 7. Install Docker.
 
    - For Mac, you can use Docker Desktop if you meet the criteria of their free-use license restrictions or you pay for a license but you can also use [Colima](https://github.com/abiosoft/colima), [Podman](https://podman.io/getting-started/installation#macos) or Kubernetes installations like Minikube that expose the Docker Daemon directly.
